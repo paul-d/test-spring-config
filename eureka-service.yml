@@ -1,0 +1,35 @@
+{
+        "name" : "eureka-service",
+        "profiles" : [
+                "master"
+        ],
+        "label" : null,
+        "version" : "10",
+        "state" : null,
+        "propertySources" : [
+                {
+                    "name" : "eureka-service",
+                    "source" : {
+                        "server.port" : "${PORT:8761}",
+                        "eureka.client.register-with-eureka" : false,
+                        "eureka.client.fetch-registrey" : false
+                    }
+                },
+                {
+                        "name" : "test-spring-config",
+                        "source" : {
+                                "spring.jpa.generate-ddl" : true,
+                                "spring.rabbitmq.host" : "${DOCKER_IP}",
+                                "spring.redis.host" : "${DOCKER_IP}",
+                                "spring.zipkin.base-url" : "http://${DOCKER_IP}:9411",
+                                "spring.sleuth.sampler.percentage" : 1,
+                                "spring.sleuth.log.json.enabled" : true,
+                                "info.id" : "${spring.application.name}",
+                                "server.port" : "${PORT:${SERVER_PORT:0}}",
+                                "logging.level.org.springframework.security" : "DEBUG",
+                                "endpoints.shutdown.enabled" : true
+                        }
+                }
+        ]
+}
+
